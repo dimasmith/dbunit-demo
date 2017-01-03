@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
     <limits id="42" entity_type="SA-internal" entity_ref="42" currency="GBP"/>
+    <periodic_limits/>
 </dataset>

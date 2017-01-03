@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <limits id="42" entity_type="SA" entity_ref="42" currency="GBP"/>
+    <periodic_limits id="1" limit_id="42" amount="10" period="DAILY"/>
+    <periodic_limits id="2" limit_id="42" amount="100" period="WEEKLY"/>
+</dataset>

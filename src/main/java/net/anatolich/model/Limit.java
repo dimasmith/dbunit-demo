@@ -1,9 +1,8 @@
 package net.anatolich.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "limits")
@@ -15,6 +14,8 @@ public class Limit {
     @Column(name = "entity_ref")
     private String entityReference;
     private String currency;
+    @OneToMany(mappedBy = "limit", fetch = FetchType.EAGER, targetEntity = PeriodicLimit.class, cascade = CascadeType.ALL)
+    private Set<PeriodicLimit> periodicLimits = new HashSet<>();
 
     public Limit() {
     }
@@ -24,6 +25,11 @@ public class Limit {
         this.entityType = entityType;
         this.entityReference = entityReference;
         this.currency = currency;
+    }
+
+    public void addPeriodicLimit(PeriodicLimit periodicLimit) {
+        periodicLimit.setLimit(this);
+        periodicLimits.add(periodicLimit);
     }
 
     public String getId() {
@@ -56,6 +62,14 @@ public class Limit {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public Set<PeriodicLimit> getPeriodicLimits() {
+        return periodicLimits;
+    }
+
+    public void setPeriodicLimits(Set<PeriodicLimit> periodicLimits) {
+        this.periodicLimits = periodicLimits;
     }
 
     @Override

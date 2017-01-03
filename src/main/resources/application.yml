@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/limits
+    username: root
+    password: xsw23edc
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate

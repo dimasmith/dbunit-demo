@@ -2,7 +2,6 @@ package net.anatolich.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,8 +12,6 @@ public class PeriodicLimit {
     private String id;
     private String period;
     private String amount;
-    @ManyToOne(targetEntity = Limit.class)
-    private Limit limit;
 
     public PeriodicLimit() {
     }
@@ -49,21 +46,12 @@ public class PeriodicLimit {
         this.amount = amount;
     }
 
-    public Limit getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Limit limit) {
-        this.limit = limit;
-    }
-
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("PeriodicLimit{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", period='").append(period).append('\'');
-        sb.append(", amount='").append(amount).append('\'');
-        sb.append('}');
-        return sb.toString();
+        String sb = "PeriodicLimit{" + "id='" + id + '\'' +
+                ", period='" + period + '\'' +
+                ", amount='" + amount + '\'' +
+                '}';
+        return sb;
     }
 }

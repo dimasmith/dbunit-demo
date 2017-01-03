@@ -5,6 +5,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import net.anatolich.model.Limit;
 import net.anatolich.model.PeriodicLimit;
 import org.hamcrest.Matchers;
@@ -20,9 +21,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
@@ -75,7 +74,10 @@ public class LimitRepositoryTest {
 
     @Test
     @ExpectedDatabase(value = "classpath:datasets/limit-repository-test/create-limit-with-periodic-limits.xml", table = "limits")
-    @ExpectedDatabase(value = "classpath:datasets/limit-repository-test/create-limit-with-periodic-limits.xml", table = "periodic_limits")
+    @ExpectedDatabase(
+            value = "classpath:datasets/limit-repository-test/create-limit-with-periodic-limits.xml",
+            table = "periodic_limits",
+            assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
     public void createLimitWithPeriodicLimits() throws Exception {
         Limit limit = new Limit("42", "SA", "42", "GBP");
         limit.addPeriodicLimit(new PeriodicLimit("1", "10", "DAILY"));

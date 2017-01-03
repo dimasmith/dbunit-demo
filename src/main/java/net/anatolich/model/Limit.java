@@ -14,7 +14,8 @@ public class Limit {
     @Column(name = "entity_ref")
     private String entityReference;
     private String currency;
-    @OneToMany(mappedBy = "limit", fetch = FetchType.EAGER, targetEntity = PeriodicLimit.class, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "limit_id")
     private Set<PeriodicLimit> periodicLimits = new HashSet<>();
 
     public Limit() {
@@ -28,7 +29,6 @@ public class Limit {
     }
 
     public void addPeriodicLimit(PeriodicLimit periodicLimit) {
-        periodicLimit.setLimit(this);
         periodicLimits.add(periodicLimit);
     }
 
@@ -74,12 +74,11 @@ public class Limit {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Limit{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", entityType='").append(entityType).append('\'');
-        sb.append(", entityReference='").append(entityReference).append('\'');
-        sb.append(", currency='").append(currency).append('\'');
-        sb.append('}');
-        return sb.toString();
+        String sb = "Limit{" + "id='" + id + '\'' +
+                ", entityType='" + entityType + '\'' +
+                ", entityReference='" + entityReference + '\'' +
+                ", currency='" + currency + '\'' +
+                '}';
+        return sb;
     }
 }

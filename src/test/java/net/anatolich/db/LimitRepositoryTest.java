@@ -33,8 +33,6 @@ import static org.junit.Assert.assertThat;
         TransactionalTestExecutionListener.class,
         DependencyInjectionTestExecutionListener.class
 })
-
-
 @SpringBootApplication
 @DirtiesContext
 @EntityScan(basePackageClasses = {Limit.class})
